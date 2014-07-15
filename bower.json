@@ -1,0 +1,12 @@
+{
+  "name": "guess-game",
+  "private": true,
+  "dependencies": {
+    "bootstrap-sass-official": "~3.1.1",
+    "jquery": "~1.11.0",
+    "angularfire": "~0.7.1",
+    "angular-route": "~1.2.20",
+    "angular-mocks": "~1.2.20"
+  },
+  "devDependencies": {}
+}

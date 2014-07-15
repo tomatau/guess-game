@@ -1,0 +1,36 @@
+<form name="loginForm" class="loginForm" ng-submit="login.submit()" ng-if="!user.id">
+    <button></button>
+</form>
+
+<form name="logoutForm" class="logoutForm" ng-submit="login.logout()" ng-if="user.id">
+    <button>Logout</button>
+</form>
+
+
+{{user}}
+<style>
+    google-login form {
+        margin: 10px 10px 0px 0px;
+        position: absolute;
+        right: 0px;
+        top: 0px;
+    }
+
+    .loginForm button {
+        outline: none;
+        border: none;
+        background: none;
+        width: 60px;
+        height: 60px;
+        background-image: url('./images/Red-signin_Small_base_20dp.png');
+    }
+
+    .loginForm button:hover {
+        background-image: url('./images/Red-signin_Small_hover_20dp.png');
+    }
+
+    .loginForm button:focus,
+    .loginForm button:active {
+        background-image: url('./images/Red-signin_Small_press_20dp.png');
+    }
+</style>
