@@ -1,5 +1,5 @@
 angular.module('Auth')
-    .directive('googleLogin', function (AUTH_DIR, GameRef) {
+    .directive('googleLogin', function (AUTH_DIR, GameRef, User) {
         return {
             restrict: 'E',
             templateUrl: AUTH_DIR + "/drctv/login/google-tmpl.html",
@@ -8,6 +8,9 @@ angular.module('Auth')
             link: function(scope, elem, attr){
                 scope.auth = new FirebaseSimpleLogin(GameRef, function(error, user) {
                     scope.$apply(function(){
+                        // populate the user model
+                        User.setUser(user.thirdPartyUserData);
+                        console.log(User)
                         scope.user = user;
                     })
                 });
@@ -16,8 +19,8 @@ angular.module('Auth')
                 $scope.login = {
                     submit: function () {
                         $scope.auth.login('google', {
-                          rememberMe: true,
-                          scope: 'https://www.googleapis.com/auth/plus.login'
+                            rememberMe: true,
+                            scope: 'https://www.googleapis.com/auth/plus.login'
                         })
                     },
                     logout: function(){

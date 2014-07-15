@@ -1,7 +1,13 @@
+// define core modules
+angular.module('Models', [ ]);
+// root services such as logging, gateways, etc...
+
+// main module used as app
 angular.module('GuessGame', [ 'Auth' ])
-    .config(function () {
-        
-    })
+
+// other services plug into these root ones
+// 
+// routing plugs into everything else at the end 
 
 // TODO:
 // 
