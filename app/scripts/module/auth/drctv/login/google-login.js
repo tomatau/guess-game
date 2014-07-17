@@ -6,13 +6,19 @@ angular.module('Auth')
             scope: true,
             // require another directive and inject ctrl ?^
             link: function(scope, elem, attr){
+                // should use $firebaseSimpleLogin.$login.then
                 scope.auth = new FirebaseSimpleLogin(GameRef, function(error, user) {
-                    scope.$apply(function(){
-                        // populate the user model
-                        User.setUser(user.thirdPartyUserData);
-                        console.log(User)
-                        scope.user = user;
-                    })
+                    if ( error ) {
+                        // do something about it
+                    }
+                    if ( user ) {
+                        scope.$apply(function(){
+                            // populate the user model
+                            User.setUser(user.thirdPartyUserData);
+                            console.log('Logged in:', User)
+                            scope.user = user;
+                        })
+                    }
                 });
             },
             controller: function($scope, $element, $attrs, $transclude){

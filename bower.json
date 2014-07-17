@@ -6,7 +6,8 @@
     "jquery": "~1.11.0",
     "angularfire": "~0.7.1",
     "angular-route": "~1.2.20",
-    "angular-mocks": "~1.2.20"
+    "angular-mocks": "~1.2.20",
+    "valentine": "~2.1.0"
   },
   "devDependencies": {}
 }

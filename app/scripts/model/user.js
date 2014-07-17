@@ -1,6 +1,8 @@
 ;(function(){
     'use strict';
-
+    /**
+     * The Current User
+     */
     function User(){
         this.data = {
             name: 'Guest'

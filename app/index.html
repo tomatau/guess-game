@@ -17,7 +17,7 @@
         <!-- endbuild -->
 
     </head>
-    <body ng-app="GuessGame">
+    <body ng-app="GuessGameApp">
         <div class="container">
             <h3>Guessing Game</h3>
             <google-login></google-login>
@@ -27,27 +27,34 @@
  -->
         <!-- build:js scripts/vendor.js -->
         <!-- bower:js -->
-<script src="bower_components/firebase/firebase.js"></script>
-<script src="bower_components/firebase-simple-login/firebase-simple-login.js"></script>
-<script src="bower_components/angular/angular.js"></script>
-<script src="bower_components/angular-route/angular-route.js"></script>
-<script src="bower_components/angularfire/angularfire.js"></script>
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/firebase/firebase.js"></script>
+        <script src="bower_components/firebase-simple-login/firebase-simple-login.js"></script>
+        <script src="bower_components/angularfire/angularfire.js"></script>
+        <script src="bower_components/angular-route/angular-route.js"></script>
+        <script src="bower_components/angular-mocks/angular-mocks.js"></script>
+        <script src="bower_components/valentine/valentine.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
 
         <!-- build:js scripts/main.js -->
-
         <script src="scripts/main.js"></script>
 
         <!-- Models -->
         <script src="scripts/model/user.js"></script>
 
         <!-- Firebase -->
-        <script src="scripts/module/firebase/ref-service.js"></script>
+        <script src="scripts/firebase/guessgame-ref-service.js"></script>
 
+        <!-- Modules -->
         <!-- Auth -->
         <script src="scripts/module/auth/auth.js"></script>
         <script src="scripts/module/auth/drctv/login/google-login.js"></script>
+        <!-- Guessing Game -->
+        <script src="scripts/module/guess-game/guess-game.js"></script>
+        <script src="scripts/module/guess-game/model/user-list.js"></script>
+        <script src="scripts/module/guess-game/users-online-service.js"></script>
+        <script src="scripts/module/guess-game/chat-room.js"></script>
         <!-- endbuild -->
 </body>
 </html>
