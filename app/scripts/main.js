@@ -1,7 +1,7 @@
 // define core modules
 angular.module('Models', [ ]);
 // root services such as logging, gateways, etc...
-angular.module('Firebase', []);
+angular.module('FireGateway', [ 'firebase' ]);
 
 // main module used as app
 angular.module('GuessGameApp', [ 'Auth', 'GuessGame' ])

@@ -9,6 +9,7 @@
 
     UserList.prototype.addUser = function(userData) {
         this.online.push(userData);
+        // console.log(this.online)
     };
 
     UserList.prototype.removeUser = function(userId) {
