@@ -34,7 +34,9 @@ angular.module('GuessGameApp', [ 'Auth', 'GuessGame' ])
 // 
 
 /*
-1. Google Auth / Email Auth
-2. Chat and Round not started
+1. Google Auth / (Email Auth)
+2. User List
+3. Chat and Round not started (Waiting room)
+
 
  */

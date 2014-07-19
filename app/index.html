@@ -21,11 +21,8 @@
         <div class="container">
             <h3>Guessing Game</h3>
             <google-login></google-login>
-
-            <ul>
-                <li ng-repeat="u in users">
-                    {{u}}
-                </li>
+            <user-list></user-list>
+            <chat></chat>
         </div>
 <!-- 
         <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -57,9 +54,14 @@
         <script src="scripts/module/auth/drctv/login/google-login.js"></script>
         <!-- Guessing Game -->
         <script src="scripts/module/guess-game/guess-game.js"></script>
+            <!-- Models -->
         <script src="scripts/module/guess-game/model/user-list.js"></script>
+            <!-- Services -->
         <script src="scripts/module/guess-game/users-online-service.js"></script>
         <script src="scripts/module/guess-game/chat-room.js"></script>
+            <!-- Directives -->
+        <script src="scripts/module/guess-game/drctv/user-list/user-list.js"></script>
+        <script src="scripts/module/guess-game/drctv/chat/chat.js"></script>
         <!-- endbuild -->
 </body>
 </html>

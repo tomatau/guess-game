@@ -4,18 +4,21 @@
      * The Current User
      */
     function User(){
+        this.setDefault();
+    }
+
+    User.prototype.setDefault = function() {
         this.data = {
             // id: Math.floor(Math.random() * 1000),
             name: 'Guest'
         };
-    }
+    };
 
     User.prototype.setUser = function(userData) {
         if ( ! this.validData(userData) ) 
             throw new Error('Invalid user data supplied');
         // if we have a user already, ask confirmation
         this.data = userData;
-        console.log('setting user', this.data)
     };
 
     User.prototype.validData = function(userData) {
@@ -26,6 +29,10 @@
 
     User.prototype.hasId = function() {
         return (this.data.id != null);
+    };
+
+    User.prototype.getName = function() {
+        return this.data.name;
     };
 
     angular.module('Models')

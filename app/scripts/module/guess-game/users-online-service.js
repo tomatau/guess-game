@@ -7,26 +7,30 @@ angular.module('GuessGame')
 
         usersOnlineQuery.on('child_added', function (snapshot) {
             UserList.addUser(snapshot.val());
-        })
+        });
 
         usersOnlineQuery.on('child_removed', function (snapshot) {
             UserList.removeUser(snapshot.val());
-        })
-        // 
+        });
+
         // watch the state of current user,
         $rootScope.$watch( function(){ return User.data },
             function (newValue, oldVal) {
-                // console.log('user data change:', arguments)
-                if ( User.hasId() )
-                    usersOnlineRef.child(User.data.id).set(User.data)
+                // login
+                if ( User.hasId() && oldVal != newValue )
+                    usersOnlineRef.child(newValue.id).set(newValue);
+
+                // logout
+                if ( ! User.hasId() && oldVal.id )
+                    usersOnlineRef.child(oldVal.id).remove();
             }
-        )
+        );
 
         // remove the user when then navigate away or close the page
         angular.element($window).on('beforeunload', function(){
             if ( User.hasId() )
                 usersOnlineRef.child(User.data.id).remove();
-        })
+        });
         // move this stuff into a directive:
         // 
         //  we don't need to use this manually, it's just responding to firebase
