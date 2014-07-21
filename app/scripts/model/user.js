@@ -27,9 +27,11 @@
         return true;
     };
 
-    User.prototype.hasId = function() {
+    User.prototype.hasId = function() { // conflicting as we expose data contents anyway
         return (this.data.id != null);
     };
+    
+    // should provide a getter
 
     User.prototype.getName = function() {
         return this.data.name;

@@ -1,10 +1,18 @@
 angular.module('Auth')
     .directive('googleLogin', 
-        function (AUTH_DIR, GameRef, User, $firebaseSimpleLogin, $rootScope) {
+        function (
+            AUTH_DIR, 
+            GameRef, 
+            User, 
+            $firebaseSimpleLogin, 
+            $rootScope
+        ) {
+        // move auth object to here instead
         return {
             restrict: 'E',
             templateUrl: AUTH_DIR + "/drctv/login/google-tmpl.html",
             scope: true,
+            // controllerAs: 'login',
             // require another directive and inject ctrl ?^
             link: function(scope, elem, attr){
                 scope.auth = $firebaseSimpleLogin(GameRef);
@@ -20,6 +28,7 @@ angular.module('Auth')
                 });
             },
             controller: function($scope, $element, $attrs, $transclude){
+                // why a login object?
                 $scope.login = {
                     submit: function () {
                         $scope.auth.$login('google', {

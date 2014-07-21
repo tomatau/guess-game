@@ -2,6 +2,7 @@ angular.module('GuessGame')
     .factory('usersOnlineRef', function(GameRef){
         return GameRef.child('usersOnline');
     })
+    // not happy with this service
     .factory('usersOnline', function (usersOnlineRef, UserList, User, $rootScope, $window) {
         var usersOnlineQuery = usersOnlineRef.endAt().limit(50);
 
@@ -31,8 +32,8 @@ angular.module('GuessGame')
             if ( User.hasId() )
                 usersOnlineRef.child(User.data.id).remove();
         });
+
         // move this stuff into a directive:
-        // 
         //  we don't need to use this manually, it's just responding to firebase
         //  it only needs to manipulate the UserList Model
         return usersOnlineQuery;
