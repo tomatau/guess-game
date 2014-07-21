@@ -1,6 +1,5 @@
 angular.module('GuessGame')
     .factory('usersOnlineRef', function(GameRef){
-        console.log('users online reg')
         return GameRef.child('usersOnline');
     })
     // not happy with this service

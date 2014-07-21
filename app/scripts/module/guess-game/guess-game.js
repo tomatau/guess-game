@@ -3,7 +3,7 @@
     
     angular.module('GuessGame', [ 'FireGateway', 'Models' ])
         .constant('GG_DIR', "./scripts/module/guess-game")
-        .run(function(chatRoom, usersOnline, $rootScope, UserList){
+        .run(function( $rootScope, UserList){
             'use strict';
             // console.log(arguments)
             // make the service run so can debugg

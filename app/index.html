@@ -21,7 +21,9 @@
         <div class="container">
             <h3>Guessing Game</h3>
             <google-login></google-login>
-            <chat class="col-sm-8"></chat>
+            <div ng-view>
+                
+            </div>
             <user-list class="col-sm-4"></user-list>
         </div>
 <!-- 
@@ -62,6 +64,8 @@
             <!-- Directives -->
         <script src="scripts/module/guess-game/drctv/user-list/user-list.js"></script>
         <script src="scripts/module/guess-game/drctv/chat/chat.js"></script>
+        <!-- Routing -->
+        <script src="scripts/routing/waiting-room/route.js"></script>
         <!-- endbuild -->
 </body>
 </html>

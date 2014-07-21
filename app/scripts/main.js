@@ -7,7 +7,19 @@ angular.module('FireGateway', [ 'firebase' ]);
 // should move the gateway into someplace else? currently it's required by modules
 
 // main module used as app
-angular.module('GuessGameApp', [ 'Auth', 'GuessGame' ])
+angular.module('GuessGameApp', [ 'Auth', 'GuessGame', 'ngRoute' ])
+    .config(function ($routeProvider) {
+        $routeProvider
+            .when('/error', {
+                template: "<p>Error</p>"
+            })
+            .otherwise({
+                redirectTo: '/'
+            })
+    })
+    .run(function () {
+        
+    });
 
 // other services plug into the root ones
 // 

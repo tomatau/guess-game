@@ -9,6 +9,7 @@ angular.module('GuessGame')
         User, 
         GG_DIR, 
         chatRoomRef,
+        usersOnline, // initialises itself
         $firebase
     ) {
         'use strict';
@@ -26,7 +27,9 @@ angular.module('GuessGame')
                 // )
                 // watching an object, shares state automagically
                 scope.userData = User.data;
-                scope.messages = $firebase(chatRoomRef.child('messages').limit(12));
+                scope.messages = $firebase(
+                    chatRoomRef.child('messages').limit(12)
+                );
             },
             controller: function($scope){
                 $scope.send = {
