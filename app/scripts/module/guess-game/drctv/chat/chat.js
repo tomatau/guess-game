@@ -1,5 +1,17 @@
+// ;(function () {
+
 angular.module('GuessGame')
-    .directive('chat', function (User, GG_DIR) {
+    .constant('CHAT_KEY', 'chatRoom')
+    .factory('chatRoomRef', function(GameRef, CHAT_KEY){
+        return GameRef.child(CHAT_KEY);
+    })
+    .directive('chat', function (
+        User, 
+        GG_DIR, 
+        chatRoomRef,
+        $firebase
+    ) {
+        'use strict';
         return {
             restrict: 'E',
             templateUrl: GG_DIR + "/drctv/chat/tmpl.html",
@@ -7,19 +19,39 @@ angular.module('GuessGame')
             controllerAs: 'chat',
             // require the game runner service?, can use controller
             link: function(scope, elem, attr){
-                // using a method makes the watch necessary
-                // can just dig into user.data.id
-                scope.$watch(
-                    function(){ return User.getName(); },
-                    function(newValue){ scope.userName = newValue; }
-                )
+                // using a string literal from a method makes the watch necessary
+                // scope.$watch(
+                //     function(){ return User.getName(); },
+                //     function(newValue){ scope.userName = newValue; }
+                // )
+                // watching an object, shares state automagically
+                scope.userData = User.data;
+                scope.messages = $firebase(chatRoomRef.child('messages').limit(12));
             },
             controller: function($scope){
+                $scope.send = {
+                    message: ''
+                };
+                var validMessage = function(message){
+                    if ( typeof message === "string" )
+                        return true;
+                }
                 $scope.postMessage = function(){
-                    // trim it, send it to a service
-                    // send the datetime too
+                    // validate
+                    if (validMessage($scope.send.message))
+                        $scope.messages.$add({
+                            message: $scope.send.message,
+                            userName: $scope.userData.name,
+                            datetime: Date.now()
+                        });
+
+                    $scope.send.message = "";
+                }
+                $scope.date = function(dt){
+                    return new Date(dt)
                 }
             }
         }
     })
 ;
+// }());

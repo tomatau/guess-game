@@ -2,6 +2,8 @@ angular.module('GuessGame')
     .constant('CHAT_KEY', 'chatRoom')
     // change to gateways
     .factory('chatRoom', function (firebaseGuessGame, CHAT_KEY, usersOnline) {
+        'use strict';
+        
         var chatRoom = firebaseGuessGame.$child(CHAT_KEY);
         // console.log(chatRoom)
         // use a messages array of objects

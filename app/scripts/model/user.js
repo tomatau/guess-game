@@ -4,21 +4,24 @@
      * The Current User
      */
     function User(){
+        this.data = {};
         this.setDefault();
     }
 
     User.prototype.setDefault = function() {
-        this.data = {
+        // keep reference but clear all properties
+        for (var member in this.data) delete this.data[member];
+        angular.extend(this.data, {
             // id: Math.floor(Math.random() * 1000),
             name: 'Guest'
-        };
+        });
     };
 
     User.prototype.setUser = function(userData) {
         if ( ! this.validData(userData) ) 
             throw new Error('Invalid user data supplied');
         // if we have a user already, ask confirmation
-        this.data = userData;
+        angular.extend(this.data, userData);
     };
 
     User.prototype.validData = function(userData) {

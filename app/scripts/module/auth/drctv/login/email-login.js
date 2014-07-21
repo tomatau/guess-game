@@ -1,5 +1,6 @@
 angular.module('Auth')
     .directive('emailLogin', function (AUTH_DIR, GameRef) {
+        'use strict';
         var auth = new FirebaseSimpleLogin(GameRef, function(error, user) {});
         // console.log(GameRef, auth)
 

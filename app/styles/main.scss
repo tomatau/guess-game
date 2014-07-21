@@ -7,10 +7,10 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/font
 body > .container {
     position: relative;
 }
+.container {
+    max-width: 1130px;
+}
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
-    .container {
-        max-width: 730px;
-    }
 }

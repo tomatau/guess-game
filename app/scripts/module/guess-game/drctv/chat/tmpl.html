@@ -1,6 +1,33 @@
 <div class="message-area">
-    
+    <p ng-repeat="m in messages">
+        <code>{{ m.datetime | date }}</code>
+        <strong>{{ m.userName }}</strong>:
+        {{ m.message }}
+    </p>
 </div>
-{{ userName }} <input type="text" name="message" placeholder="Your Message">
+<form name="messageForm" ng-submit="postMessage()">
+    <fieldset>
+        <p>
+        {{ userData.name }}
+        <input type="text"
+            class="message" 
+            name="message" 
+            ng-model="send.message" 
+            placeholder="Your Message">
+        <input type="submit" hidden>
+        </p>
+    </fieldset>
+</form>
 
 <!-- {{ ( gameStarted ) ? 'Enter Your Guess!' : 'Chat Message'  }} -->
+<style>
+    chat {
+        display: block;
+        border-style: solid;
+        border-width: 1px;
+    }
+
+    chat .message {
+        width: 300px;
+    }
+</style>

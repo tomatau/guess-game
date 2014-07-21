@@ -1,12 +1,12 @@
 angular.module('Auth')
-    .directive('googleLogin', 
-        function (
+    .directive('googleLogin', function (
             AUTH_DIR, 
             GameRef, 
             User, 
             $firebaseSimpleLogin, 
             $rootScope
-        ) {
+    ) {
+        'use strict';
         // move auth object to here instead
         return {
             restrict: 'E',
@@ -24,7 +24,7 @@ angular.module('Auth')
                 });
                 $rootScope.$on('$firebaseSimpleLogin:logout', function (event, user) {
                     User.setDefault();
-                    scope.user = user;
+                    // scope.user = user;
                 });
             },
             controller: function($scope, $element, $attrs, $transclude){
