@@ -13,6 +13,7 @@
         for (var member in this.data) delete this.data[member];
         angular.extend(this.data, {
             gameId: 0,
+            submitted: false, // update this first
             status: 'waiting-room',
             startedTime: Date.now(),
             finishedTime: null
