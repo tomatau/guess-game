@@ -1,5 +1,20 @@
 ;(function(){
     'use strict';
+    var WAITING = 'waitingRoom',
+        REQUEST = 'startButton',
+        INPLAY = 'battleField';
+
+    Game.prototype.setStatus = function(s){  this.data.status = s; }
+    // Game.prototype.waitingRoom = Game.setStatus.bind(WAITING);
+    // Game.prototype.startButton = function(){
+    //     Game.setStatus(REQUEST);
+        // this should update remotely
+        // 
+        // then generateAWord
+        // then setFirstRound
+        //      this updates and then the listenerChanges the route with the new game
+    // }
+    // Game.prototype.battleField = Game.setStatus.bind(INPLAY);
     /**
      * The Current Game
      */
@@ -8,15 +23,18 @@
         this.setDefault();
     }
 
+    Game.prototype.setData = function(data) {
+        angular.extend(this.data, data);
+    }
+
     Game.prototype.setDefault = function() {
         // keep object reference but clear all properties
         for (var member in this.data) delete this.data[member];
         angular.extend(this.data, {
-            gameId: 0,
-            submitted: false, // update this first
-            status: 'waiting-room',
+            currentRound: 0,
             startedTime: Date.now(),
-            finishedTime: null
+            status: WAITING,
+            totalRounds: 5
         });
     };
 

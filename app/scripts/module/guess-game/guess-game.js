@@ -3,8 +3,11 @@
     
     angular.module('GuessGame', [ 'FireGateway', 'Models' ])
         .constant('GG_DIR', "./scripts/module/guess-game")
+        .factory('currentGameRef', function(GameRef){
+            return GameRef.child('currentGame');
+        })
         // include any self initialising services
-        .run(function( usersOnline ){
+        .run(function( usersOnline, currentGame ){
             'use strict';
             // console.log(arguments)
             // 

@@ -24,6 +24,10 @@
         })
     };
 
+    UserList.prototype.resetOnline = function() {
+        this.online.length = 0;
+    };
+
     angular.module('Models')
         // service is a constuctor
         // use factory to return constrctor if need multiple instances

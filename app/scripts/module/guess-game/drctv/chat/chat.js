@@ -27,7 +27,7 @@ angular.module('GuessGame')
                 // watching an object, shares state automagically
                 scope.userData = User.data;
                 scope.messages = $firebase(
-                    chatRoomRef.child('messages').limit(12)
+                    chatRoomRef.child('messages').limit(12) // only last 12 messages, lol
                 );
             },
             controller: function($scope){
