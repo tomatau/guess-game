@@ -9,7 +9,7 @@
     }
 
     Game.prototype.setDefault = function() {
-        // keep reference but clear all properties
+        // keep object reference but clear all properties
         for (var member in this.data) delete this.data[member];
         angular.extend(this.data, {
             gameId: 0,

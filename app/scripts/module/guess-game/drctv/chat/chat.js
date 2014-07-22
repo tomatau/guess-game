@@ -9,7 +9,6 @@ angular.module('GuessGame')
         User, 
         GG_DIR, 
         chatRoomRef,
-        usersOnline, // initialises itself
         $firebase
     ) {
         'use strict';

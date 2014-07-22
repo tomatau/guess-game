@@ -47,5 +47,5 @@ angular.module('GuessGame')
         //  we don't need to use this manually, it's just responding to firebase
         //  it only needs to manipulate the UserList Model
         return usersOnlineQuery;
-    });
+    })
 ;
