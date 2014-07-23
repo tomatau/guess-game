@@ -29,6 +29,7 @@
     Game.prototype.nextRound = function() {
         if ( this.data.currentRound == this.data.totalRounds )
             return false;
+        ++this.data.currentRound;
         return true;
     }
 

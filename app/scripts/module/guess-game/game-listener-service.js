@@ -4,22 +4,23 @@ angular.module('GuessGame')
         currentGameRef,
         currentGame,
         Game,
-        $location
+        $location,
+        $q
     ) {
         'use strict';
+        var def = $q.defer();
         // sync Game model
         currentGameRef.once('value', function(dataSnapshot){
             // console.log('ONCE', dataSnapshot.val(), Game.data)
             if ( dataSnapshot.val() == null )
                 currentGame.initGame();
             else if ( ! angular.equals(Game.data, dataSnapshot.val()) )
-                currentGame.syncGame(dataSnapshot.val());
+                Game.setData(dataSnapshot.val());
 
             currentGameRef.on('value', handleChange);
-
             // may be a problem, if currentpage is waiting room but game is in battle
-            //  should change the location
-            // and visa versa
+            // provide a defer to use in resolve
+            def.resolve();
         })
 
         function handleChange(dataSnapshot){
@@ -28,25 +29,17 @@ angular.module('GuessGame')
             if ( angular.equals(Game.data, newGameData) ) // no change
                 return false;
 
-            // if status changed
-            switch(newGameData.status){
-                case 'startButton':
-                    $rootScope.$broadcast('status:' + newGameData);
-                    break;
-                case 'battleField':
-                    $location.path("war");
-                    break;
-                case 'waitingRoom':
-                    // location waiting room
-                    break;
+            $rootScope.$apply(function(){
+                Game.setData(newGameData);
+                switch(Game.get('status')){
+                case 'startButton': $rootScope.$broadcast('status:' + newGameData); break;
+                case 'battleField': $location.path("war"); break;
+                case 'waitingRoom': $location.path("/"); break;
                 default: break;
-            }
-
-            // Game.currentRound changed
-            //      broadcast it so views can update
-            //      
-            // current round listener should have updated too
+                }
+            });
         }
 
+        return def.promise;
     })
 ;

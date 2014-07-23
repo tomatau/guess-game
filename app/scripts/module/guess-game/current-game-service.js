@@ -4,15 +4,13 @@ angular.module('GuessGame')
         currentRoundRef,
         Game,
         Round,
-        nameRequestRound
+        nameRequestRound,
+        $location
     ) {
         'use strict';
         return {
             initGame: function(){
                 currentGameRef.set(Game.data);
-            },
-            syncGame: function(remoteData) {
-                Game.setData(remoteData)
             },
         //     # used by directives
         //     - game control
@@ -41,7 +39,8 @@ angular.module('GuessGame')
                             currentRoundRef.set(Round.data);
                             // save the round so it's available for everyone
                             Game.battleStatus();
-                            currentGameRef.set(Game.data); // will change route
+                            currentGameRef.set(Game.data); // will change route for others
+                            $location.path("war"); // change route for self
                         })
             },
         //  rounte changes will protect us from loading wrong state

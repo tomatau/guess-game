@@ -22,11 +22,17 @@ angular.module('GuessGame')
         usersOnlineQuery.on('child_added', function (snapshot) {
             console.log('added from ref', snapshot.val())
             UserList.addUser(snapshot.val());
+            if ( ! $rootScope.$$phase ) {
+                $rootScope.$apply();
+            }
         });
 
         usersOnlineQuery.on('child_removed', function (snapshot) {
             console.log('REMOVE USER', snapshot.val())
             UserList.removeUser(snapshot.val());
+            if ( ! $rootScope.$$phase ) {
+                $rootScope.$apply();
+            }
         });
 
         // watch the state of current user,
