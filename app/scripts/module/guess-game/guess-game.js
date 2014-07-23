@@ -7,7 +7,7 @@
             return GameRef.child('currentGame');
         })
         // include any self initialising services
-        .run(function( usersOnline, currentGame ){
+        .run(function( usersOnline, gameListener ){
             'use strict';
             // console.log(arguments)
             // 

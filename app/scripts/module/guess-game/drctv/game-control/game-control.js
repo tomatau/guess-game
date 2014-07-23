@@ -5,7 +5,7 @@ angular.module('GuessGame')
             restrict: 'E',
             templateUrl: GG_DIR + "/drctv/game-control/tmpl.html",
             scope: true,
-            // controllerAs: 'control',
+            controllerAs: 'control',
             link: function(scope){
                 // split into multiple lists showing number online etc
             },
@@ -15,8 +15,8 @@ angular.module('GuessGame')
                 Game
             ){
                 $scope.game = Game.data;
-                
-                $scope.startButton = function(){
+
+                this.startButton = function(){
                     // either events
                     // or directly onto currentGame
                     currentGame.startButton();

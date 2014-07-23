@@ -4,25 +4,15 @@ angular.module('GuessGame')
         Game
     ) {
         'use strict';
-
-        currentGameRef.on('value', function(dataSnapshot){
-            console.log('value event:', dataSnapshot.val())
-
-            // create a game only if it doesn't exist
-            if ( dataSnapshot.val() == null ) {
-                console.log('setting', Game.data)
-                currentGameRef.set(Game.data)
-            }
-            // it exists
-            else {
-                // equality checks don't work even when not strict
-                // sync with firebase
-                if ( ! angular.equals(Game.data, dataSnapshot.val()) )
-                    Game.setData(dataSnapshot.val())
-            }
-        })
         // API:
         return {
+            // listener
+            initGame: function(){
+                currentGameRef.set(Game.data);
+            },
+            syncGame: function(remoteData) {
+                Game.setData(remoteData)
+            },
         //     # used by directives
         //     - game control
         //         - resetButton
@@ -45,11 +35,16 @@ angular.module('GuessGame')
         //             - status 'battlefield'
         //             - setFirstRound
             startButton: function(){
-                // if status == waitingRoom
-                Game.status('startButton'); // sets it
-                // currentGameRef.set(Game.data)
-                // Game.setFirstRound();
+                if (Game.get('status') != 'waitingRoom') return false;
+                // initially set to started, will give users a chance to cancel
+                Game.startStatus();
+                currentGameRef.set(Game.data);
 
+                // generate a word
+                // Word.generateWord();
+                // update current round
+                // Round.updateRound(Word);
+                // Game.nextRound();
             },
         //         - makeGuess guess
         //             - validate it

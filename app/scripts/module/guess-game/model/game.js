@@ -4,9 +4,9 @@
         REQUEST = 'startButton',
         INPLAY = 'battleField';
 
-    Game.prototype.setStatus = function(s){  this.data.status = s; }
-    // Game.prototype.waitingRoom = Game.setStatus.bind(WAITING);
-    // Game.prototype.startButton = function(){
+    Game.prototype.startStatus = function(){
+        this.data.status = REQUEST;
+    }
     //     Game.setStatus(REQUEST);
         // this should update remotely
         // 
@@ -37,6 +37,10 @@
             totalRounds: 5
         });
     };
+
+    Game.prototype.get = function(prop) {
+        return this.data[prop];
+    }
 
     angular.module('Models')
         .service('Game', Game)
