@@ -41,10 +41,9 @@ angular.module('GuessGame')
                 currentGameRef.set(Game.data);
 
                 // generate a word
-                // Word.generateWord();
                 // update current round
-                // Round.updateRound(Word);
-                // Game.nextRound();
+                if ( Game.nextRound() ) // need a service to get words
+                    Round.nextRound(Game.data);
             },
         //         - makeGuess guess
         //             - validate it

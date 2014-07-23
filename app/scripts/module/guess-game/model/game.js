@@ -40,7 +40,13 @@
 
     Game.prototype.get = function(prop) {
         return this.data[prop];
-    }
+    };
+
+    Game.prototype.nextRound = function() {
+        if (this.data.currentRound == this.data.totalRounds )
+            return false;
+        return ++this.currentRound;
+    };
 
     angular.module('Models')
         .service('Game', Game)
