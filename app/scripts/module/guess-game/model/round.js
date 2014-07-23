@@ -5,16 +5,23 @@
      */
     function Round(){
         this.data = {};
-        this.setDefault();
+        this.reset();
     }
 
-    Round.prototype.setDefault = function() {
+    Round.prototype.reset = function() {
         // keep object reference but clear all properties
         for (var member in this.data) delete this.data[member];
         angular.extend(this.data, {
             word: null,
-            roundNumber: 0
+            clues: null,
+            roundNumber: null
         });
+    };
+
+    Round.prototype.setRound = function(word, clues, roundNumber) {
+        this.data.word = word;
+        this.data.clues = clues;
+        this.data.roundNumber = roundNumber;
     };
 
     Round.prototype.nextRound = function(gameData, word) {

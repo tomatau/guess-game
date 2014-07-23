@@ -48,17 +48,5 @@ angular.module('GuessGame')
             // current round listener should have updated too
         }
 
-        // API:
-        // - onStatusChange .child('status').on('value')
-        //      - ifNewValue
-        //      - ifWaitingRoom
-        //          changeLocation to waiting room
-        //      - ifBattleField
-        //          changeLocation to battlefield
-        //      - ifWaiting
-        //          broadcastWaitingEvent
-        //              disable startButton
-        //              display loading route?
-
     })
 ;

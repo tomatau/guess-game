@@ -17,9 +17,7 @@ angular.module('GuessGameApp', [ 'Auth', 'GuessGame', 'ngRoute' ])
                 redirectTo: '/'
             })
     })
-    .run(function () {
-        
-    });
+    .run(function () { });
 
 // other services plug into the root ones
 // 

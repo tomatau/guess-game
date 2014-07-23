@@ -2,12 +2,11 @@ angular.module('GuessGame')
     .factory('currentGame', function ( // return query object?
         currentGameRef,
         Game,
-        wordRequest
+        Round,
+        nameRequestRound
     ) {
         'use strict';
-        // API:
         return {
-            // listener
             initGame: function(){
                 currentGameRef.set(Game.data);
             },
@@ -27,29 +26,49 @@ angular.module('GuessGame')
         //     - resolve
         //         :battleField
         //             - getIsBattleFieldReady (service or model? :o)
-            
-        //     # used internally
-        //         - startButton
-        //             - status startButton
-        //             - updateFirebase fast so that other clients go into /waiting\
-        //             - 
-        //             - status 'battlefield'
-        //             - setFirstRound
             startButton: function(){
                 if (Game.get('status') != 'waitingRoom') return false;
                 // initially set to started, will give users a chance to cancel
                 Game.startStatus();
-                currentGameRef.set(Game.data);
+                // currentGameRef.set(Game.data);
 
                 if ( Game.nextRound() )
-                    wordRequest.getWordPromise()
-                        .then(function (word) {
-                            Round.nextRound(Game.data, word);
+                    nameRequestRound.getRoundPromise(Game.get('currentRound'))
+                        .then(function (round) {
+                            // Round.nextRound(Game.data, word);
                             // save the game and save the round
-                            console.log(Round)
-                            console.log(Game)
+                            console.log(Round.data)
+                            // save the round so it's available for everyone
+                            console.log(Game.data)
+                            // save the game 
+                            // trigger everyone's listener
+                            //      couold be a route change
+                            //      could be from the game changing
+                            // 
+                            //  initial route change will need to be here
+                            //  
+                            //  rounte changes will protect us from loading wrong state
+                            //      ie. game will be responding to game.data for guess' etc
+                            //  
+                            //  if the round changes to have an 'over' (or we push the completedRound onto game)
+                            //      .. display the word from the round
+                            //      .. on exit, some AOP to make a loader to display word and score
+                            //    the guy who triggers this round over, should:
+                            //      - sleep, 
+                            //      - then update round again (nextRound)
+                            //      - then update game,
+                            //  
+                            //  when game updates current round
+                            //      
+                            // 
+                            //  final game change will signify the end of the total game
+                            //      should allow pople to join the waiting room after displaying all this stuff
+                            //   
+                            //  user list for individual score
+                            //      will need this for total score so make a new list for just game
+                            //     
+                            //  
                         })
-                // update current round
             },
         //         - makeGuess guess
         //             - validate it

@@ -1,6 +1,4 @@
-//'Auth' // don't need it, using user
-(function () {
-    
+(function () {    
     angular.module('GuessGame', [ 'FireGateway', 'Models', 'xml' ])
         .constant('GG_DIR', "./scripts/module/guess-game")
         .factory('currentGameRef', function(GameRef){
@@ -10,6 +8,4 @@
         .run(function( usersOnline, gameListener ){
             'use strict';
         })
-
-    ;
 }());
