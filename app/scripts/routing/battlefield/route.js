@@ -15,13 +15,13 @@ angular.module('GuessGameApp')
                 resolve: {
                     ready: [
                         'Game',
-                        'Round',
+                        'roundListener',
                         'gameListener',
                         '$q',
-                        function( Game, Round, gameListener,$q ){
-                            console.log(Game, Round);
+                        function( Game, roundListener, gameListener,$q ){
+                            console.log(roundListener);
                             var def = $q.defer();
-                            gameListener.then(function(){
+                            $q.all([gameListener, roundListener]).then(function(){
                                 if ( Game.get('status') == 'battleField' ) {
                                     def.resolve(true);
                                 } else {

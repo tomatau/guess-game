@@ -20,7 +20,7 @@ angular.module('GuessGame')
         // should provide pagination of this
 
         usersOnlineQuery.on('child_added', function (snapshot) {
-            console.log('added from ref', snapshot.val())
+            // console.log('added from ref', snapshot.val())
             UserList.addUser(snapshot.val());
             if ( ! $rootScope.$$phase ) {
                 $rootScope.$apply();
@@ -28,7 +28,7 @@ angular.module('GuessGame')
         });
 
         usersOnlineQuery.on('child_removed', function (snapshot) {
-            console.log('REMOVE USER', snapshot.val())
+            // console.log('REMOVE USER', snapshot.val())
             UserList.removeUser(snapshot.val());
             if ( ! $rootScope.$$phase ) {
                 $rootScope.$apply();

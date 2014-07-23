@@ -1,6 +1,10 @@
-<div class="instructions">
 {{game}}
+<div class="instructions" ng-if="game.status == 'waitingRoom'">
     <p>Gather enough players</p>
     <p>When you have everyone ready, click start!</p>
+
     <button class="btn" ng-click="control.startButton()">Start</button>
+</div>
+<div class="instructions" ng-if="game.status == 'battleField'">
+    <h3>You are in battle!</h3>
 </div>

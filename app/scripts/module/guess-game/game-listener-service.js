@@ -23,21 +23,26 @@ angular.module('GuessGame')
             def.resolve();
         })
 
+
         function handleChange(dataSnapshot){
-            var newGameData = dataSnapshot.val();
+            var newGameData = dataSnapshot.val(),
+                previousData = angular.copy(Game.data);
             // console.log('status', newGameData, Game.data)
             if ( angular.equals(Game.data, newGameData) ) // no change
-                return false;
+                return false;            
+            Game.setData(newGameData);
 
-            $rootScope.$apply(function(){
-                Game.setData(newGameData);
-                switch(Game.get('status')){
-                case 'startButton': $rootScope.$broadcast('status:' + newGameData); break;
-                case 'battleField': $location.path("war"); break;
-                case 'waitingRoom': $location.path("/"); break;
-                default: break;
-                }
-            });
+            if ( previousData['status'] != newGameData['status'] )
+                $rootScope.$apply(function(){
+                    switch(Game.get('status')){
+                    case 'startButton': $rootScope.$broadcast('status:' + newGameData); break;
+                    case 'battleField': $location.path("war"); break;
+                    case 'waitingRoom': $location.path("/"); break;
+                    default: break;
+                    }
+                });
+
+            // if currentRound changed
         }
 
         return def.promise;

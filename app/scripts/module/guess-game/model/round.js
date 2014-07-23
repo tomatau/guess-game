@@ -17,6 +17,9 @@
             roundNumber: null
         });
     };
+    Round.prototype.setData = function(data) {
+        angular.extend(this.data, data);
+    }
 
     Round.prototype.setRound = function(word, clues, roundNumber) {
         this.data.word = word;
