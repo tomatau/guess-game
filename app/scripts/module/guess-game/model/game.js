@@ -8,9 +8,8 @@
         this.data = {};
         this.setDefault();
     }
-    Game.prototype.startStatus = function(){
-        this.data.status = REQUEST;
-    }
+    Game.prototype.startStatus = function(){ this.data.status = REQUEST; }
+    Game.prototype.battleStatus = function(){ this.data.status = INPLAY; }
     Game.prototype.setData = function(data) {
         angular.extend(this.data, data);
     }

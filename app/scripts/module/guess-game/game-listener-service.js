@@ -3,7 +3,8 @@ angular.module('GuessGame')
         $rootScope,
         currentGameRef,
         currentGame,
-        Game
+        Game,
+        $location
     ) {
         'use strict';
         // sync Game model
@@ -33,8 +34,7 @@ angular.module('GuessGame')
                     $rootScope.$broadcast('status:' + newGameData);
                     break;
                 case 'battleField':
-                    // go to battlefield
-                    // resolve function will need a round
+                    $location.path("war");
                     break;
                 case 'waitingRoom':
                     // location waiting room

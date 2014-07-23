@@ -4,6 +4,9 @@
         .factory('currentGameRef', function(GameRef){
             return GameRef.child('currentGame');
         })
+        .factory('currentRoundRef', function(GameRef){
+            return GameRef.child('currentRound');
+        })
         // include any self initialising services
         .run(function( usersOnline, gameListener ){
             'use strict';
