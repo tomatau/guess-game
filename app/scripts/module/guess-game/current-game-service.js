@@ -1,7 +1,8 @@
 angular.module('GuessGame')
     .factory('currentGame', function ( // return query object?
         currentGameRef,
-        Game
+        Game,
+        wordRequest
     ) {
         'use strict';
         // API:
@@ -40,10 +41,15 @@ angular.module('GuessGame')
                 Game.startStatus();
                 currentGameRef.set(Game.data);
 
-                // generate a word
+                if ( Game.nextRound() )
+                    wordRequest.getWordPromise()
+                        .then(function (word) {
+                            Round.nextRound(Game.data, word);
+                            // save the game and save the round
+                            console.log(Round)
+                            console.log(Game)
+                        })
                 // update current round
-                if ( Game.nextRound() ) // need a service to get words
-                    Round.nextRound(Game.data);
             },
         //         - makeGuess guess
         //             - validate it

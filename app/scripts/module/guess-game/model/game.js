@@ -43,9 +43,12 @@
     };
 
     Game.prototype.nextRound = function() {
-        if (this.data.currentRound == this.data.totalRounds )
+        console.log(this.data.currentRound, this.data.totalRounds)
+        if ( this.data.currentRound == this.data.totalRounds )
             return false;
-        return ++this.currentRound;
+        console.log(++this.data.currentRound)
+        console.log(this.data.currentRound)
+        return true;
     };
 
     angular.module('Models')

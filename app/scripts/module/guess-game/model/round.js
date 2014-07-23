@@ -13,22 +13,17 @@
         for (var member in this.data) delete this.data[member];
         angular.extend(this.data, {
             word: null,
-            clues: [],
             roundNumber: 0
         });
     };
 
-    Round.prototype.nextRound = function(gameData) {
+    Round.prototype.nextRound = function(gameData, word) {
         if ( this.data.roundNumber >= gameData.currentRound )
             return false;
 
-        this.setNewWord()
+        this.word = word;
         // watch the round number?
         this.data.roundNumber = gameData.currentRound;
-    }
-
-    Round.prototype.setNewWord = function(word, clues) {
-        // set them
     }
 
 

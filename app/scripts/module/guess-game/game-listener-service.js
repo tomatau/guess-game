@@ -6,7 +6,7 @@ angular.module('GuessGame')
         Game
     ) {
         'use strict';
-        // sync Game
+        // sync Game model
         currentGameRef.once('value', function(dataSnapshot){
             // console.log('ONCE', dataSnapshot.val(), Game.data)
             if ( dataSnapshot.val() == null )
@@ -23,7 +23,7 @@ angular.module('GuessGame')
 
         function handleChange(dataSnapshot){
             var newGameData = dataSnapshot.val();
-            console.log('status', newGameData, Game.data)
+            // console.log('status', newGameData, Game.data)
             if ( angular.equals(Game.data, newGameData) ) // no change
                 return false;
 
