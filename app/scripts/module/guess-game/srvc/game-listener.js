@@ -11,11 +11,12 @@ angular.module('GuessGame')
         var def = $q.defer();
         // sync Game model
         currentGameRef.once('value', function(dataSnapshot){
+            var newGameData = dataSnapshot.val();
             // console.log('ONCE', dataSnapshot.val(), Game.data)
-            if ( dataSnapshot.val() == null )
+            if ( newGameData == null )
                 currentGame.initGame();
-            else if ( ! angular.equals(Game.data, dataSnapshot.val()) )
-                Game.setData(dataSnapshot.val());
+            else if ( ! angular.equals(Game.data, newGameData) )
+                Game.setData(newGameData);
 
             currentGameRef.on('value', handleChange);
             // may be a problem, if currentpage is waiting room but game is in battle
@@ -29,9 +30,9 @@ angular.module('GuessGame')
                 previousData = angular.copy(Game.data);
             // console.log('status', newGameData, Game.data)
             if ( angular.equals(Game.data, newGameData) ) // no change
-                return false;            
-            Game.setData(newGameData);
-
+                return false;
+            else
+                Game.setData(newGameData);
             if ( previousData['status'] != newGameData['status'] )
                 $rootScope.$apply(function(){
                     switch(Game.get('status')){
@@ -41,9 +42,6 @@ angular.module('GuessGame')
                     default: break;
                     }
                 });
-
-            // if currentRound changed
-            //      startTimerin Round
         }
 
         return def.promise;

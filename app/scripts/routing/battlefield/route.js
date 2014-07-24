@@ -19,7 +19,6 @@ angular.module('GuessGameApp')
                         'gameListener',
                         '$q',
                         function( Game, roundListener, gameListener,$q ){
-                            console.log(roundListener);
                             var def = $q.defer();
                             $q.all([gameListener, roundListener]).then(function(){
                                 if ( Game.get('status') == 'battleField' ) {
@@ -36,6 +35,6 @@ angular.module('GuessGameApp')
             })
     })
     .controller('BfCont', function($rootScope, Game, Round){
-        console.log('br controller', Game.data, Round.data);
+        // console.log('br controller', Game.data, Round.data);
         $rootScope.$broadcast('battlefield:connected');
     })

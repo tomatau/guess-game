@@ -1,7 +1,7 @@
 angular.module('GuessGame')
-    .factory('currentGame', function ( // return query object?
+    .factory('currentGame', function (
         currentGameRef,
-        currentRoundRef,
+        currentRound,
         Game,
         Round,
         nameRequestRound,
@@ -25,7 +25,7 @@ angular.module('GuessGame')
                     nameRequestRound.getRoundPromise( Game.get('currentRound') )
                         .then(function(round) {
                             // save the game and save the round
-                            currentRoundRef.set( Round.data );
+                            currentRound.update();
                             // save the round so it's available for everyone
                             Game.battleStatus();
                             currentGameRef.set( Game.data ); // will change route for others
@@ -71,12 +71,11 @@ angular.module('GuessGame')
             makeGuess: function(){},
 
 
-        //         - resetButton
-        //             - resetGame
-        //             - updateGame
-        //             - wait 2 seconds so people can cancel?
-        //             - status waitingRoom
-            resetButton: function(){},
+            resetButton: function(){
+                Game.setDefault();
+                currentGameRef.set( Game.data )
+                currentRound.remove();
+            },
         };
         // TODO: SET SECURITY RULES
     })

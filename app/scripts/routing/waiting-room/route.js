@@ -7,13 +7,30 @@ angular.module('GuessGameApp')
             .when('/', {
                 templateUrl: WAITING_ROOM.dir + "tmpl.html",
                 resolve: {
-                    gameReady: function(gameListener){
-                        return gameListener;
-                    }
+                    gameReady: [
+                        'Game',
+                        'gameListener',
+                        'roundListener',
+                        '$q',
+                        '$location',
+                        function(Game, gameListener, roundListener, $q, $location){
+                            var def = $q.defer();
+                            $q.all([gameListener]).then(function(){
+                                if ( Game.get('status') == 'battleField' ) {
+                                    $location.path('war')
+                                } else {
+                                    def.resolve(true);
+                                }
+                            })
+                            return def.promise;
+                        }
+                    ]
                 },
                 controller: 'WrCont'
             })
     })
-    .controller('WrCont', function(Game){
-        console.log('wr controller', Game.data)
+    .controller('WrCont', function(Game, Round){
+        // console.log('wr controller:')
+        // console.log(Game.data)
+        // console.log(Round.data)
     })

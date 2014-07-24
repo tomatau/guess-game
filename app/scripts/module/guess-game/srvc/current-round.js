@@ -2,25 +2,34 @@ angular.module('GuessGame')
     .factory('currentRound', function ( // return query object?
         currentRoundRef,
         Round,
-        $interval
+        $interval,
+        $rootScope
     ) {
         'use strict';
+        var interval;
 
         var currentRound = {
-            roundCountdown: function(){
+            update: function(){
+                currentRoundRef.set( Round.data );
+            },
+            startCountdown: function(){
                 Round.initCountdown();
-                currentRound.updateRound();
-                var interval = $interval(function(){
+                currentRound.updateCountdown();
+                interval = $interval(function(){
                     if ( Round.tick() ) {
-                        currentRound.updateRound();
+                        currentRound.updateCountdown();
                     } else {
                         $interval.cancel(interval);
-                        // broadcast the round over
                     }
                 }, 1000)
             },
-            updateRound: function() {
+            updateCountdown: function() {
                 currentRoundRef.child('countdown').set(Round.get('countdown'));
+            },
+            remove: function(){
+                Round.reset();
+                $interval.cancel(interval);
+                currentRoundRef.remove();
             }
         };
         return currentRound;

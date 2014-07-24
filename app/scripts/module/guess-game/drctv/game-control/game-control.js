@@ -17,14 +17,12 @@ angular.module('GuessGame')
                 $scope.game = Game.data;
 
                 this.startButton = function(){
-                    // either events
-                    // or directly onto currentGame
                     currentGame.startButton();
                 }
 
-                // $scope.resetButton = function(){
-                //     currentGame.resetButton();
-                // }
+                this.resetButton = function(){
+                    currentGame.resetButton();
+                }
             }
         }
     })

@@ -48,7 +48,7 @@
     }
 
     Round.prototype.tick = function() {
-        if (this.data.countdown == 0)
+        if (this.data.countdown < 1 || this.data.countdown == null)
             return false;
         this.data.countdown--;
         return true;
