@@ -23,9 +23,7 @@ angular.module('GuessGame')
                 if ( Game.nextRound() )
                     nameRequestRound.getRoundPromise( Game.get('currentRound') )
                         .then(function(round) {
-                            // save the game and save the round
                             currentRound.update();
-                            // save the round so it's available for everyone
                             Game.battleStatus();
                             currentGameRef.set( Game.get() ); // will change route for others
                             $location.path("war"); // change route for self

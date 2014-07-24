@@ -32,6 +32,13 @@
         });
     }
 
+    Game.prototype.roundComplete = function(round) { // maybe just add roundData (copy)
+        this.completeRounds.push({
+            userScores: [], // have this also exist in a list for 'game users'
+            word: ""
+        })
+    };
+
     Game.prototype.nextRound = function() {
         if ( this.data.currentRound == this.data.totalRounds )
             return false;

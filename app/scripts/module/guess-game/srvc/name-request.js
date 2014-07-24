@@ -12,7 +12,7 @@ angular.module('GuessGame')
             clues = [];
 
         function getRandomName(){
-            return $http({  url: "http://www.behindthename.com/api/random.php",
+            return $http({ url: "http://www.behindthename.com/api/random.php",
                     params: {
                         key: "th386401",
                         number: 1,
@@ -32,6 +32,7 @@ angular.module('GuessGame')
                     var xml = xmlFilter(data);
                     clues = {
                         firstLetter: randomName.charAt(0),
+                        lastLetter: randomName.charAt(randomName.length - 1),
                         numberOfLetters: randomName.length,
                         gender: (xml.find('gender')[0].innerHTML == "f") ? "female" : "male",
                         usage: xml.find('usage_full')[0].innerHTML
@@ -40,10 +41,10 @@ angular.module('GuessGame')
         }
 
         return {
-            getRoundPromise: function(round){
+            getRoundPromise: function(roundNumber){
                 return getRandomName().then(getClues)
                     .then(function(){
-                        Round.setRound(randomName, clues, round)
+                        Round.setRound(randomName, clues, roundNumber)
                         return Round;
                     });
             }

@@ -28,10 +28,8 @@ angular.module('GuessGame')
         });
 
         usersOnlineQuery.on('child_removed', function (snapshot) {
-            console.log('REMOVE USER', snapshot.val())
-            console.log(UserList.users())
+            // console.log('REMOVE USER', snapshot.val())
             UserList.removeUser(snapshot.val());
-            console.log(UserList.users())
             if ( ! $rootScope.$$phase ) {
                 $rootScope.$apply();
             }

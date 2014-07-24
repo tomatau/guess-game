@@ -28,6 +28,7 @@ angular.module('GuessGame')
             if ( angular.equals(Round.get(), newRoundData) ) // no change
                 return false;
 
+            // the order of these three things... not sure about hey
             Round.setData(newRoundData);
 
             if (newRoundData == null) {
@@ -35,9 +36,7 @@ angular.module('GuessGame')
                 $location.path('/')
             }
 
-            if ( ! $rootScope.$$phase ) {
-                $rootScope.$apply();
-            }
+            if ( ! $rootScope.$$phase ) {$rootScope.$apply(); }
         }
 
         $rootScope.$on('battlefield:connected', function(){
