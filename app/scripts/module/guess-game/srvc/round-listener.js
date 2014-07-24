@@ -32,6 +32,16 @@ angular.module('GuessGame')
             });
         }
 
+        // on a battlefield join event, or round:started
+        $rootScope.$on('battlefield:connected', function(){
+            // check if countdown is null
+            console.log(Round.get('countdown'))
+            if (Round.get('countdown') == null){
+                currentRoundRef.roundCountdown();
+            }
+        })
+        // if it is, start the timer
+
         return def.promise;
     })
 ;

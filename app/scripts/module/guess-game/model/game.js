@@ -9,6 +9,10 @@
         this.setDefault();
     }
 
+    Game.prototype.get = function(prop) {
+        return this.data[prop];
+    }
+
     Game.prototype.startStatus = function(){ this.data.status = REQUEST; }
     Game.prototype.battleStatus = function(){ this.data.status = INPLAY; }
 
@@ -25,10 +29,6 @@
             status: WAITING,
             totalRounds: 5
         });
-    }
-
-    Game.prototype.get = function(prop) {
-        return this.data[prop];
     }
 
     Game.prototype.nextRound = function() {

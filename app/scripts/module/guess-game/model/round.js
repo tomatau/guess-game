@@ -9,6 +9,10 @@
         this.reset();
     }
 
+    Round.prototype.get = function(prop) {
+        return this.data[prop];
+    }
+
     Round.prototype.reset = function() {
         // keep object reference but clear all properties
         for (var member in this.data) delete this.data[member];
@@ -16,7 +20,7 @@
             word: null,
             clues: null,
             roundNumber: null,
-            countdown: countDownTimeMs
+            countdown: null
         });
     };
 
@@ -37,6 +41,17 @@
         this.word = word;
         // watch the round number?
         this.data.roundNumber = gameData.currentRound;
+    }
+
+    Round.prototype.initCountdown = function() {
+        this.data.countdown = countDownTimeMs;
+    }
+
+    Round.prototype.tick = function() {
+        if (this.data.countdown == 0)
+            return false;
+        this.data.countdown--;
+        return true;
     }
 
     angular.module('Models')

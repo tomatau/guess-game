@@ -35,6 +35,7 @@ angular.module('GuessGameApp')
                 controller: 'BfCont'
             })
     })
-    .controller('BfCont', function(Game, Round){
-        console.log('br controller', Game.data, Round.data)
+    .controller('BfCont', function($rootScope, Game, Round){
+        console.log('br controller', Game.data, Round.data);
+        $rootScope.$broadcast('battlefield:connected');
     })
