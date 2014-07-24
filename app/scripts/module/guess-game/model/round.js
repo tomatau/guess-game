@@ -1,5 +1,6 @@
 ;(function(){
     'use strict';
+    var countDownTimeMs = 10;
     /**
      * The Current Round
      */
@@ -14,9 +15,11 @@
         angular.extend(this.data, {
             word: null,
             clues: null,
-            roundNumber: null
+            roundNumber: null,
+            countdown: countDownTimeMs
         });
     };
+
     Round.prototype.setData = function(data) {
         angular.extend(this.data, data);
     }
@@ -35,7 +38,6 @@
         // watch the round number?
         this.data.roundNumber = gameData.currentRound;
     }
-
 
     angular.module('Models')
         .service('Round', Round)

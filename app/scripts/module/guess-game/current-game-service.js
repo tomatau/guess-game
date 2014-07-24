@@ -8,48 +8,33 @@ angular.module('GuessGame')
         $location
     ) {
         'use strict';
+        function roundOver(){
+            // 
+        }
+
         return {
             initGame: function(){
                 currentGameRef.set(Game.data);
             },
-        //     # used by directives
-        //     - game control
-        //         - resetButton
-        //         - startButton
-        //     - guesser
-        //         - makeGuess
-        //     - clue
-        //         - bind to current clue (on model)
-
-        //     # used by routes
-        //     - resolve
-        //         :battleField
-        //             - getIsBattleFieldReady (service or model? :o)
             startButton: function(){
                 if (Game.get('status') != 'waitingRoom') return false;
-
                 // initially set to started, will give users a chance to cancel
                 Game.startStatus();
-                currentGameRef.set(Game.data);
-
+                currentGameRef.set( Game.data );
                 if ( Game.nextRound() )
-                    nameRequestRound.getRoundPromise(Game.get('currentRound'))
-                        .then(function (round) {
+                    nameRequestRound.getRoundPromise( Game.get('currentRound') )
+                        .then(function(round) {
                             // save the game and save the round
-                            currentRoundRef.set(Round.data);
+                            currentRoundRef.set( Round.data );
                             // save the round so it's available for everyone
                             Game.battleStatus();
-                            currentGameRef.set(Game.data); // will change route for others
+                            currentGameRef.set( Game.data ); // will change route for others
                             $location.path("war"); // change route for self
                         })
             },
-        //  rounte changes will protect us from loading wrong state
-        //      ie. route resolve will be responding to whether game and round being ready
-        //  
-        //  if the round changes to have an 'over' (or we push the completedRound onto game)
-        //      .. display the word from the round
-        //      .. on exit, some AOP to make a loader to display word and score
+        //  if the round changes to have an 'over' (or we push the completedRound onto Game)
         //    the guy who triggers this round over, should:
+        //      .. on exit, some AOP to display the word from the round and each users score
         //      - sleep, 
         //      - then update round again (nextRound)
         //      - then update game,
@@ -63,6 +48,14 @@ angular.module('GuessGame')
         //      will need this for total score so make a new list for just game
         //     
         //  
+                // THINGS
+                //  : start timer - drctv controller on roundNumber change, inside round
+                //  : make a guess - guess directive -> currentGame(round) / roundScores.user in firebase
+                //      : update User's Score
+                //  : display round over / word and score - listen to round.countdown/over
+                //      : wait a second
+                //  : start the next round - currentGame (inside makeGuess) -> roundListener
+                //      : 
 
 
         //         - makeGuess guess
@@ -70,7 +63,7 @@ angular.module('GuessGame')
         //                 - getScore
         //                 - updateGame (addRound)
         //                 - updateGameUsers
-        //             - wasFinalRound && allUsersHaveGuessed
+        //             - wasFinalRound && roundOver
         //                 - get theFinal Score
         //                 - setCongratulations
         //                 - wait about 2 seconds

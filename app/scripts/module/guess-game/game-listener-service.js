@@ -43,6 +43,7 @@ angular.module('GuessGame')
                 });
 
             // if currentRound changed
+            //      startTimerin Round
         }
 
         return def.promise;

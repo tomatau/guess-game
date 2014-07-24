@@ -8,9 +8,23 @@ angular.module('GuessGame')
             controllerAs: 'clue',
             link: function(scope){
             },
-            controller: function( $scope, Round ){
+            controller: function( $scope, Round, $interval){
                 console.log('clue', Round.data)
-                this.data = Round.data;
+                $scope.round = Round.data;
+
+                $scope.$watch(
+                    function () { return Round.data.roundNumber },
+                    function (oldVal, newVal) {
+                        var interval = $interval(function(){
+                            if (Round.data.countdown == 0) {
+                                // broadcast the round over
+                                $interval.cancel(interval);
+                            } else {
+                                Round.data.countdown--;
+                            }
+                        }, 1000)
+                    }
+                )
             }
         }
     })

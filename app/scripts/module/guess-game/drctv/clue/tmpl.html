@@ -1,2 +1,6 @@
-<p>HELLO</p>
-{{ clue.data }}
+<p>The name beings with the letter: <strong>{{ round.clues.firstLetter }}</strong></p>
+<p>The number of letters that the word has is: <strong>{{ round.clues.numberOfLetters }}</strong></p>
+<p>The gender of the name is usually: <strong>{{ round.clues.gender }}</strong></p>
+<p>The is most commonly used in: <strong>{{ round.clues.usage }}</strong></p>
+<!-- <h5>You have  seconds remaining to guess!</h5> -->
+<h1>{{ round.countdown }}</h1>
