@@ -55,6 +55,12 @@
         return true;
     }
 
+    Round.prototype.getScore = function(guess) {
+        if ( guess == this.data.word )
+            return this.data.countdown;
+        return 0;
+    }
+
     angular.module('Models')
         .service('Round', Round)
         ;

@@ -17,10 +17,19 @@ angular.module('GuessGameApp')
                         'Game',
                         'roundListener',
                         'gameListener',
+                        'scoresListener',
                         '$q',
-                        function( Game, roundListener, gameListener,$q ){
+                        function(
+                            Game, 
+                            roundListener, 
+                            gameListener, 
+                            scoresListener, 
+                            $q 
+                        ){
                             var def = $q.defer();
-                            $q.all([gameListener, roundListener]).then(function(){
+                            $q.all(
+                              [ gameListener, roundListener, scoresListener ]
+                            ).then(function(){
                                 if ( Game.get('status') == 'battleField' ) {
                                     def.resolve(true);
                                 } else {

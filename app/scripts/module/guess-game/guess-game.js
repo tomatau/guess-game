@@ -8,7 +8,7 @@
             return GameRef.child('currentRound');
         })
         // include any self initialising services
-        .run(function( usersOnline, gameListener ){
+        .run(function( usersOnline ){
             'use strict';
         })
 }());

@@ -1,0 +1,35 @@
+<div class="guess-area">
+    <p ng-repeat="g in guesss">
+        <code>{{ g.score }}</code>
+        <strong>{{ g.userName }}</strong>:
+        {{ g.guess }}
+    </p>
+</div>
+<form name="guessForm" ng-submit="postGuess()">
+    <fieldset>
+        <p>
+            {{ userData.name }}
+            <input type="text"
+                class="guess" 
+                name="guess" 
+                ng-model="send.guess" 
+                placeholder="Your Guess">
+            <input type="submit" hidden>
+        </p>
+    </fieldset>
+</form>
+<style>
+    guesser {
+        display: block;
+        border-style: solid;
+        border-width: 1px;
+    }
+
+    .guess-area {
+        min-height: 100px;
+    }
+
+    guesser .guess {
+        width: 300px;
+    }
+</style>
