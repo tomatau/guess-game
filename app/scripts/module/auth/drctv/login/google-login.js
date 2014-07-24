@@ -19,7 +19,7 @@ angular.module('Auth')
                 $rootScope.$on('$firebaseSimpleLogin:login', function (event, user) {
                     if (user != null) {
                         User.setUser(user.thirdPartyUserData);
-                        scope.user = User.data;
+                        scope.user = User.get();
                     }
                 });
                 $rootScope.$on('$firebaseSimpleLogin:logout', function (event, user) {

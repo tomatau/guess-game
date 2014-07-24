@@ -10,6 +10,7 @@
     }
 
     Game.prototype.get = function(prop) {
+        if (prop == null) return this.data;
         return this.data[prop];
     }
 

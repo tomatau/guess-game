@@ -7,7 +7,7 @@ angular.module('GuessGame')
             scope: true,
             controllerAs: 'clue',
             link: function(scope){
-                scope.round = Round.data;
+                scope.round = Round.get();
             },
             controller: function( $scope ){
             }

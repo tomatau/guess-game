@@ -21,7 +21,7 @@ angular.module('GuessGame')
                 // scope.$watch( function(){ return User.get('name'); },
                 //     function(newValue){ scope.userName = newValue; } )
                 // watching an object, shares state automagically
-                scope.userData = User.data;
+                scope.userData = User.get(); // should make a getData function
                 scope.messages = $firebase(
                     chatRoomRef.child('messages').limit(12) // only last 12 messages, lol
                 );

@@ -4,28 +4,31 @@
     //  so use a model instead of firebaseChild directly
 
     function UserList(){
-        this.online = [];
+        this.list = [];
+    }
+
+    UserList.prototype.get = function(prop) {
+        return this.list;
     }
 
     UserList.prototype.addUser = function(userData) {
-        this.online.push(userData);
-        // console.log(this.online)
+        this.list.push(userData);
     };
 
     UserList.prototype.removeUser = function(userId) {
-        var index = v.indexOf( this.online, this.getUser(userId) );
+        var index = v.indexOf( this.list, this.getUser(userId) );
         // this could piss up the history list
-        this.online.splice(index, 1);
+        this.list.splice(index, 1);
     };
 
     UserList.prototype.getUser = function(userId) {
-        return v.find(this.online, function(user){
+        return v.find(this.list, function(user){
             return user.id == userId;
         })
     };
 
-    UserList.prototype.resetOnline = function() {
-        this.online.length = 0;
+    UserList.prototype.resetList = function() {
+        this.list.length = 0;
     };
 
     angular.module('Models')

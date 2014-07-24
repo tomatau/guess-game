@@ -12,8 +12,8 @@ angular.module('GuessGame')
         var def = $q.defer();
         // sync Game model
         currentRoundRef.once('value', function(dataSnapshot){
-            // console.log('ONCE', dataSnapshot.val(), Round.data)
-            if ( ! angular.equals(Round.data, dataSnapshot.val()) )
+            // console.log('ONCE', dataSnapshot.val(), Round.get())
+            if ( ! angular.equals(Round.get(), dataSnapshot.val()) )
                 Round.setData(dataSnapshot.val());
 
             currentRoundRef.on('value', handleChange);
@@ -24,8 +24,8 @@ angular.module('GuessGame')
 
         function handleChange(dataSnapshot){
             var newRoundData = dataSnapshot.val();
-            // console.log('status', newRoundData, Round.data)
-            if ( angular.equals(Round.data, newRoundData) ) // no change
+            // console.log('status', newRoundData, Round.get())
+            if ( angular.equals(Round.get(), newRoundData) ) // no change
                 return false;
 
             Round.setData(newRoundData);

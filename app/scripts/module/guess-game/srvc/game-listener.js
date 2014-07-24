@@ -12,10 +12,10 @@ angular.module('GuessGame')
         // sync Game model
         currentGameRef.once('value', function(dataSnapshot){
             var newGameData = dataSnapshot.val();
-            // console.log('ONCE', dataSnapshot.val(), Game.data)
+            // console.log('ONCE', dataSnapshot.val(), Game.get())
             if ( newGameData == null )
                 currentGame.initGame();
-            else if ( ! angular.equals(Game.data, newGameData) )
+            else if ( ! angular.equals(Game.get(), newGameData) )
                 Game.setData(newGameData);
 
             currentGameRef.on('value', handleChange);
@@ -27,9 +27,9 @@ angular.module('GuessGame')
 
         function handleChange(dataSnapshot){
             var newGameData = dataSnapshot.val(),
-                previousData = angular.copy(Game.data);
-            // console.log('status', newGameData, Game.data)
-            if ( angular.equals(Game.data, newGameData) ) // no change
+                previousData = angular.copy(Game.get());
+            // console.log('status', newGameData, Game.get())
+            if ( angular.equals(Game.get(), newGameData) ) // no change
                 return false;
             else
                 Game.setData(newGameData);

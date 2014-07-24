@@ -12,7 +12,7 @@ angular.module('GuessGame')
                 //     return UserList.online
                 // }, function(){
                 //     console.log('USers online', UserList.online)
-                    scope.userList = UserList.online;
+                    scope.userList = UserList.get();
                 // },
                 // true);
             }

@@ -1,5 +1,5 @@
 angular.module('GuessGame')
-    .factory('currentRound', function ( // return query object?
+    .factory('currentRound', function (
         currentRoundRef,
         Round,
         $interval,
@@ -10,7 +10,7 @@ angular.module('GuessGame')
 
         var currentRound = {
             update: function(){
-                currentRoundRef.set( Round.data );
+                currentRoundRef.set( Round.get() );
             },
             startCountdown: function(){
                 Round.initCountdown();

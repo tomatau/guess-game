@@ -29,9 +29,9 @@ angular.module('GuessGame')
 
         usersOnlineQuery.on('child_removed', function (snapshot) {
             console.log('REMOVE USER', snapshot.val())
-            console.log(UserList.online)
+            console.log(UserList.users())
             UserList.removeUser(snapshot.val());
-            console.log(UserList.online)
+            console.log(UserList.users())
             if ( ! $rootScope.$$phase ) {
                 $rootScope.$apply();
             }
@@ -39,7 +39,7 @@ angular.module('GuessGame')
 
         // watch the state of current user,
         $rootScope.$watch( 
-            function(){ return User.data },
+            function(){ return User.get() },
             function (newValue, oldVal) {
                 // login
                 if ( User.hasId() && oldVal != newValue )
@@ -55,7 +55,7 @@ angular.module('GuessGame')
         // remove the user when then navigate away or close the page
         angular.element($window).on('beforeunload', function(){
             if ( User.hasId() )
-                usersOnlineRef.child(User.data.id).remove();
+                usersOnlineRef.child(User.get('id')).remove();
         });
 
         // move this stuff into a directive:

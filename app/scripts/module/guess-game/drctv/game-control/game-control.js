@@ -14,7 +14,7 @@ angular.module('GuessGame')
                 currentGame,
                 Game
             ){
-                $scope.game = Game.data;
+                $scope.game = Game.get();
 
                 this.startButton = function(){
                     currentGame.startButton();

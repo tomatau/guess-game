@@ -3,7 +3,6 @@ angular.module('GuessGame')
         currentGameRef,
         currentRound,
         Game,
-        Round,
         nameRequestRound,
         $location
     ) {
@@ -14,13 +13,13 @@ angular.module('GuessGame')
 
         return {
             initGame: function(){
-                currentGameRef.set(Game.data);
+                currentGameRef.set(Game.get());
             },
             startButton: function(){
                 if (Game.get('status') != 'waitingRoom') return false;
                 // initially set to started, will give users a chance to cancel
                 Game.startStatus();
-                currentGameRef.set( Game.data );
+                currentGameRef.set( Game.get() );
                 if ( Game.nextRound() )
                     nameRequestRound.getRoundPromise( Game.get('currentRound') )
                         .then(function(round) {
@@ -28,7 +27,7 @@ angular.module('GuessGame')
                             currentRound.update();
                             // save the round so it's available for everyone
                             Game.battleStatus();
-                            currentGameRef.set( Game.data ); // will change route for others
+                            currentGameRef.set( Game.get() ); // will change route for others
                             $location.path("war"); // change route for self
                         })
             },
@@ -73,7 +72,7 @@ angular.module('GuessGame')
 
             resetButton: function(){
                 Game.setDefault();
-                currentGameRef.set( Game.data )
+                currentGameRef.set( Game.get() )
                 currentRound.remove();
             },
         };
