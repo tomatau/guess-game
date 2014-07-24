@@ -12,16 +12,16 @@ angular.module('GuessGame')
         var def = $q.defer();
 
         guesserRef.child('guesss').once('value', function(dataSnapshot){
-            var guesss = []
+            var guesss = [];
             dataSnapshot.forEach(function (childSnapshot) {
                 guesss.push(childSnapshot.val())
             });
-            console.log('ONCE', guesss)
+            // console.log('ONCE', guesss)
 
             if ( ! angular.equals(Scores.get(), guesss) )
                 Scores.setScores(guesss);
 
-            console.log('once setting: ', Scores)
+            // console.log('once setting: ', Scores)
 
             guesserRef.child('guesss').on('child_added', handleChange); // add_child guess
             def.resolve();
@@ -29,16 +29,14 @@ angular.module('GuessGame')
 
         function handleChange(dataSnapshot, previousSiblingSnapshot){
             var newGuessData = dataSnapshot.val();
-            console.log('childAdded', newGuessData)
-            if ( newGuessData != null )
+            // console.log('childAdded', newGuessData)
+            if ( newGuessData == null )
                 return false;
 
-            var guessingUser = UserList.getUser(newGuessData.userId);
-            var roundScore = Scores.toScore(guessingUser, newGuessData);
-            Scores.addScore(roundScore);
+            Scores.addScore(newGuessData);
 
             if ( ! $rootScope.$$phase ) {$rootScope.$apply(); }
-            console.log(Scores.scores)
+            // console.log('finally', Scores.scores)
         }
 
         return def.promise;

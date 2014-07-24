@@ -11,34 +11,45 @@
         return this.scores;
     };
     
-    Scores.prototype.setScores = function(scores){
+    Scores.prototype.setScores = function(guesss){
         this.scores.length = 0;
-        v.merge(this.scores, scores || []);
+        guesss.forEach(this.addScore.bind(this))
     }
     
-    Scores.prototype.addScore = function(guess, score){
-        var userScore = v.filter(this.scores, function(value){
-            return !!( value.user.id == score.user.id )
-        }).pop()
+    Scores.prototype.addScore = function(score){
+        var userScore = this.scores.filter(function(value){
+            return !!( value.user && ( value.user.id == score.user.id ) )
+        });
+
+        if ( userScore == null || userScore.length == 0 )
+            return this.scores.push(score);
+        else
+            userScore = userScore.pop()
+
         // this should update the object in the array by ref
         // if exists and lastScoredRound is not game.round
-        if (userScore != null && guess.round > userScore.round) {
-            userScore.round = guess.round;
-            userScore.totalScore += guess.score;
-        } else {
-            this.scores.push(guess)
+        if ( userScore != null ) {
+            if ( score.round > userScore.round ) {
+                userScore.score = score.score;
+                userScore.guess = score.guess;
+                userScore.round = score.round;
+            } else if ( score.round == userScore.round && score.score > userScore.score ) {
+                userScore.score = score.score;
+                userScore.guess = score.guess;
+            }
         }
     }
 
     Scores.prototype.toScore = function(user, guess){
         var userScore = {
             user: {
-                id: user.get('id'),
-                name: user.get('name'),
-                email: user.get('email')
+                id: user.id,
+                name: user.name,
+                email: user.email
             },
+            guess: guess.guess,
             round: guess.round,
-            totalScore: guess.score
+            score: guess.score
         };
         return userScore;
     }

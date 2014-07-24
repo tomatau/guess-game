@@ -6,6 +6,7 @@ angular.module('GuessGame')
     .directive('guesser', function (
         User, 
         Round, 
+        Scores,
         GG_DIR, 
         guesserRef,
         $firebase
@@ -29,14 +30,32 @@ angular.module('GuessGame')
                         return true;
                 }
                 $scope.postGuess = function(){
+                    var scoreGuess = Scores.toScore(
+                                $scope.userData,
+                                {
+                                    guess: $scope.send.guess,
+                                    round: Round.get('roundNumber'),
+                                    score: Round.getScore($scope.send.guess)
+                                }
+                            );
+                    console.log(scoreGuess);
+                    // use the Scores to make a score
                     if (validGuess($scope.send.guess))
-                        $scope.guesss.$add({
-                            guess: $scope.send.guess,
-                            userName: $scope.userData.name,
-                            userId: $scope.userData.id,
-                            round: Round.get('roundNumber'),
-                            score: Round.getScore($scope.send.guess)
-                        });
+                        $scope.guesss.$add(
+                            scoreGuess
+                        );
+
+
+                        // $scope.guesss.$add({
+                        //     user: {
+                        //         id: $scope.userData.id,
+                        //         email: $scope.userData.email,
+                        //         name: $scope.userData.name
+                        //     },
+                        //     guess: $scope.send.guess,
+                        //     round: Round.get('roundNumber'),
+                        //     score: Round.getScore($scope.send.guess)
+                        // });
                     $scope.send.guess = "";
                 }
             }
