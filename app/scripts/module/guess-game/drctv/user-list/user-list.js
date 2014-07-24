@@ -3,7 +3,7 @@ angular.module('GuessGame')
         'use strict';
         return {
             restrict: 'E',
-            templateUrl: GG_DIR + "/drctv/user-list/tmpl.html",
+            templateUrl: GG_DIR + '/drctv/user-list/tmpl.html',
             scope: true,
             // controllerAs: 'chat',
             link: function(scope){
@@ -16,6 +16,6 @@ angular.module('GuessGame')
                 // },
                 // true);
             }
-        }
+        };
     })
 ;

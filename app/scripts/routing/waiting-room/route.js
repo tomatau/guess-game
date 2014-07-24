@@ -1,11 +1,12 @@
 angular.module('GuessGameApp')
     .constant('WAITING_ROOM', {
-        dir: "scripts/routing/waiting-room/"
+        dir: 'scripts/routing/waiting-room/'
     })
     .config(function ($routeProvider, WAITING_ROOM) {
+        'use strict';
         $routeProvider
             .when('/', {
-                templateUrl: WAITING_ROOM.dir + "tmpl.html",
+                templateUrl: WAITING_ROOM.dir + 'tmpl.html',
                 resolve: {
                     gameReady: [
                         'Game',

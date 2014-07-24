@@ -3,7 +3,7 @@ angular.module('GuessGame')
         return function (input, value) {
             value = Number(value);
             for (var i = 0; i < value; i++)
-                input.push(i)
+                input.push(i);
             return input;
         }
     })

@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('FireGateway')
-        .constant('APP_URL', "https://guessing-game.firebaseio.com")
+        .constant('APP_URL', 'https://guessing-game.firebaseio.com')
         .factory('GameRef', function(APP_URL){
             return new Firebase(APP_URL);
         })
