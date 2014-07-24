@@ -36,8 +36,8 @@
     
     // should provide a getter
 
-    User.prototype.getName = function() {
-        return this.data.name;
+    User.prototype.get = function(prop) {
+        return this.data[prop];
     };
 
     angular.module('Models')

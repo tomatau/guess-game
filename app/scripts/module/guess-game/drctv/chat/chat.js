@@ -18,7 +18,7 @@ angular.module('GuessGame')
             // require the game runner service?, can use controller
             link: function(scope, elem, attr){
                 // using a string literal from a method makes the watch necessary
-                // scope.$watch( function(){ return User.getName(); },
+                // scope.$watch( function(){ return User.get('name'); },
                 //     function(newValue){ scope.userName = newValue; } )
                 // watching an object, shares state automagically
                 scope.userData = User.data;
