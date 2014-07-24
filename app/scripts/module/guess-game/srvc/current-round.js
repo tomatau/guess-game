@@ -19,7 +19,7 @@ angular.module('GuessGame')
                     if ( Round.tick() ) {
                         currentRound.updateCountdown();
                     } else { $interval.cancel(interval); }
-                }, 2000)
+                }, 4000)
             },
             updateCountdown: function() {
                 currentRoundRef.child('countdown').set(Round.get('countdown'));
@@ -28,9 +28,6 @@ angular.module('GuessGame')
                 Round.reset();
                 $interval.cancel(interval);
                 currentRoundRef.remove();
-            },
-            addUserGuess: function (guess) {
-                
             }
         };
         return currentRound;

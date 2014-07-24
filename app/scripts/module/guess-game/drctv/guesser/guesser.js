@@ -7,9 +7,9 @@ angular.module('GuessGame')
         var currentRound = Round.get('roundNumber');
         return function(input){
             var guesss = [];
-            input.forEach(function(guess){
-                if (guess.round == currentRound)
-                    guesss.push(guess);
+            input.forEach(function(g){
+                if (g.round == currentRound)
+                    guesss.push(g);
             })
             return guesss
         }
@@ -31,7 +31,7 @@ angular.module('GuessGame')
             link: function(scope, elem, attr){
                 scope.userData = User.get(); // should make a getData function
                 scope.guesss = $firebase(
-                    guesserRef.child('guesss').limit(5) // only last 12 messages, lol
+                    guesserRef.child('guesss').limit(100) // only last 12 messages, lol
                 );
             },
             controller: function($scope){

@@ -1,6 +1,6 @@
 ;(function(){
     'use strict';
-    var countDownTimeMs = 10;
+    var countDownTicks = 12;
     /**
      * The Current Round
      */
@@ -45,7 +45,7 @@
     }
 
     Round.prototype.initCountdown = function() {
-        this.data.countdown = countDownTimeMs;
+        this.data.countdown = countDownTicks;
     }
 
     Round.prototype.tick = function() {

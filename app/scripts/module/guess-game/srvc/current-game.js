@@ -2,6 +2,7 @@ angular.module('GuessGame')
     .factory('currentGame', function (
         currentGameRef,
         currentRound,
+        currentGuess,
         Game,
         nameRequestRound,
         $location
@@ -72,6 +73,7 @@ angular.module('GuessGame')
                 Game.setDefault();
                 currentGameRef.set( Game.get() )
                 currentRound.remove();
+                currentGuess.remove();
             },
         };
         // TODO: SET SECURITY RULES

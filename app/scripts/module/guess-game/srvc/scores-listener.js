@@ -1,5 +1,5 @@
 angular.module('GuessGame')
-// CURRENT ROUNDS SCORES
+// Each user who scored in a round, highest score per round
     .factory('scoresListener', function (
         $q,
         $rootScope,
@@ -16,12 +16,9 @@ angular.module('GuessGame')
             dataSnapshot.forEach(function (childSnapshot) {
                 guesss.push(childSnapshot.val())
             });
-            // console.log('ONCE', guesss)
 
             if ( ! angular.equals(Scores.get(), guesss) )
                 Scores.setScores(guesss);
-
-            // console.log('once setting: ', Scores)
 
             guesserRef.child('guesss').on('child_added', handleChange);
             def.resolve();
@@ -29,14 +26,14 @@ angular.module('GuessGame')
 
         function handleChange(dataSnapshot, previousSiblingSnapshot){
             var newGuessData = dataSnapshot.val();
-            // console.log('childAdded', newGuessData)
-            if ( newGuessData == null )
+            if ( newGuessData == null ) {
+                console.log(newGuessData)
                 return false;
+            }
 
             Scores.addScore(newGuessData);
 
             if ( ! $rootScope.$$phase ) {$rootScope.$apply(); }
-            console.log('finally', Scores.scores)
         }
 
         return def.promise;
