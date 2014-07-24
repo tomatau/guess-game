@@ -23,7 +23,7 @@ angular.module('GuessGame')
 
             // console.log('once setting: ', Scores)
 
-            guesserRef.child('guesss').on('child_added', handleChange); // add_child guess
+            guesserRef.child('guesss').on('child_added', handleChange);
             def.resolve();
         })
 
@@ -36,7 +36,7 @@ angular.module('GuessGame')
             Scores.addScore(newGuessData);
 
             if ( ! $rootScope.$$phase ) {$rootScope.$apply(); }
-            // console.log('finally', Scores.scores)
+            console.log('finally', Scores.scores)
         }
 
         return def.promise;

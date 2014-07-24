@@ -30,10 +30,10 @@
         // if exists and lastScoredRound is not game.round
         if ( userScore != null ) {
             if ( score.round > userScore.round ) {
-                userScore.score = score.score;
-                userScore.guess = score.guess;
-                userScore.round = score.round;
+                // add a new round for the user
+                this.scores.push(score);
             } else if ( score.round == userScore.round && score.score > userScore.score ) {
+                // update current round
                 userScore.score = score.score;
                 userScore.guess = score.guess;
             }

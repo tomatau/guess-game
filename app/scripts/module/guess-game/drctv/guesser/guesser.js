@@ -3,6 +3,17 @@ angular.module('GuessGame')
     .factory('guesserRef', function(GameRef, GUESSER_KEY){
         return GameRef.child(GUESSER_KEY);
     })
+    .filter('currentRound', function (Round) {
+        var currentRound = Round.get('roundNumber');
+        return function(input){
+            var guesss = [];
+            input.forEach(function(guess){
+                if (guess.round == currentRound)
+                    guesss.push(guess);
+            })
+            return guesss
+        }
+    })
     .directive('guesser', function (
         User, 
         Round, 
@@ -38,7 +49,7 @@ angular.module('GuessGame')
                                     score: Round.getScore($scope.send.guess)
                                 }
                             );
-                    console.log(scoreGuess);
+                    // console.log(scoreGuess);
                     // use the Scores to make a score
                     if (validGuess($scope.send.guess))
                         $scope.guesss.$add(

@@ -1,7 +1,7 @@
 <div class="guess-area">
-    <p ng-repeat="g in guesss">
+    <p ng-repeat="g in guesss | orderByPriority | currentRound">
         <code>{{ g.score }}</code>
-        <strong>{{ g.userName }}</strong>:
+        <strong>{{ g.user.name }}</strong>:
         {{ g.guess }}
     </p>
 </div>

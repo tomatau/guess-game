@@ -57,8 +57,7 @@
 
     Round.prototype.getScore = function(guess) {
         if ( guess.toLowerCase() == this.data.word.toLowerCase() )
-            return 5;
-            // return this.data.countdown;
+            return this.data.countdown;
         return 0;
     }
 
