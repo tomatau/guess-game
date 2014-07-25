@@ -22,17 +22,16 @@ angular.module('GuessGame')
             // may be a problem, if currentpage is waiting room but game is in battle
             // provide a defer to use in resolve
             def.resolve();
-        })
+        });
 
+        $rootScope.$on('round:complete', currentGame.roundEnd);
 
         function handleChange(dataSnapshot){
             var newGameData = dataSnapshot.val(),
                 previousData = angular.copy(Game.get());
             // console.log('status', newGameData, Game.get())
-            if ( angular.equals(Game.get(), newGameData) ) // no change
-                return false;
-            else
-                Game.setData(newGameData);
+            if ( angular.equals(Game.get(), newGameData) ) return false;
+            else Game.setData(newGameData);
             if ( previousData['status'] != newGameData['status'] )
                 $rootScope.$apply(function(){
                     switch(Game.get('status')){

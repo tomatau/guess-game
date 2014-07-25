@@ -7,7 +7,7 @@
 </div>
 <form name="guessForm" ng-submit="postGuess()">
     <fieldset>
-        <p>
+        <p ng-if="userData.id != null">
             {{ userData.name }}
             <input type="text"
                 class="guess" 
@@ -15,6 +15,9 @@
                 ng-model="send.guess" 
                 placeholder="Your Guess">
             <input type="submit" hidden>
+        </p>
+        <p ng-if="userData.id == null">
+            Login to make a guess
         </p>
     </fieldset>
 </form>

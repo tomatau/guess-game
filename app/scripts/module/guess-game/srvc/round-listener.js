@@ -23,20 +23,34 @@ angular.module('GuessGame')
         })
 
         function handleChange(dataSnapshot){
-            var newRoundData = dataSnapshot.val();
-            // console.log('status', newRoundData, Round.get())
-            if ( angular.equals(Round.get(), newRoundData) ) // no change
-                return false;
+            var newRoundData = dataSnapshot.val(),
+                changed = getChangedValues(newRoundData);
 
-            // the order of these three things... not sure about hey
-            Round.setData(newRoundData);
-
-            if (newRoundData == null) {
+            if ( newRoundData == null ) { // reset early
                 Round.reset();
-                $location.path('/')
+                $location.path('/');
             }
 
-            if ( ! $rootScope.$$phase ) {$rootScope.$apply(); }
+            if ( !changed.length ) // no change
+                return false;
+
+            Round.setData(newRoundData);
+
+            if ( changed.status == "complete" ) {
+                Round.reset(); // game will be updated
+                $location.path('what-is-it-good-for');
+            }
+
+            if ( ! $rootScope.$$phase ) { $rootScope.$apply(); }
+        }
+
+        function getChangedValues(newRound) {
+            return v.filter(newRound, function(key, value){
+                return ( 
+                    value != Round.get(key)
+                    && !angular.equals(value, Round.get(key))
+                ) ? true : false;
+            });
         }
 
         $rootScope.$on('battlefield:connected', function(){

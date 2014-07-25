@@ -11,7 +11,7 @@ angular.module('GuessGame')
 
         var def = $q.defer();
 
-        guesserRef.child('guesss').once('value', function(dataSnapshot){
+        guesserRef.once('value', function(dataSnapshot){
             var guesss = [];
             dataSnapshot.forEach(function (childSnapshot) {
                 guesss.push(childSnapshot.val())
@@ -20,7 +20,7 @@ angular.module('GuessGame')
             if ( ! angular.equals(Scores.get(), guesss) )
                 Scores.setScores(guesss);
 
-            guesserRef.child('guesss').on('child_added', handleChange);
+            guesserRef.on('child_added', handleChange);
             def.resolve();
         })
 

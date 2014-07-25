@@ -54,6 +54,7 @@ angular.module('GuessGame')
         angular.element($window).on('beforeunload', function(){
             if ( User.hasId() )
                 usersOnlineRef.child(User.get('id')).remove();
+            // if the user who started the countdown refreshes, it's lost
         });
 
         // move this stuff into a directive:
