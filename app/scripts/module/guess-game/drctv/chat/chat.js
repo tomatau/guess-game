@@ -41,7 +41,7 @@ angular.module('GuessGame')
                         });
                     $scope.send.message = "";
                 }
-                $scope.date = function(dt){ return new Date(dt) }
+                $scope.date = function(dt){ return new Date(dt) };
             }
         }
-    })
+    });

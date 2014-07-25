@@ -24,7 +24,6 @@ angular.module('Auth')
                 });
                 $rootScope.$on('$firebaseSimpleLogin:logout', function (event, user) {
                     User.setDefault();
-                    // scope.user = user;
                 });
             },
             controller: function($scope, $element, $attrs, $transclude){
